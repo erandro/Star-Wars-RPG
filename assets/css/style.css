@@ -1,0 +1,87 @@
+
+body {
+    background-color: rgb(255, 255, 255);
+    background-image: url(https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/YWAdzU2/the-heavens-0112-twinkling-stars-in-black-space-loop_nyl1lfxf__F0000.png);
+    font-family: Teko;
+    color: white;
+}
+.row{
+    justify-content: center;
+}
+.box {
+    height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+}
+.title {
+    display: flex;
+    justify-content: center;
+}
+.subTitle {
+    font-family: Teko;
+    color: rgb(255, 255, 255);
+}
+.downText { 
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-around;
+}
+.smallDownText { 
+    color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-around;
+}
+.no-display {
+    display: none;
+}
+
+/* Charecters */
+
+.Darth_Maul, .Darth_Vader, .Kylo_Ren, .Emperor_Palpatine,
+.Obi_Wan, .Luke_Skywalker, .Rey, .Master_Yoda {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: none;  
+}
+.Darth_Maul {
+    background-image: url("../images/Darth_Maul.png");
+    alt: "Darth Maul";
+}
+.Darth_Vader {
+    background-image: url("../images/Darth_Vader.png");
+    alt: "Darth Vader";
+}
+.Kylo_Ren {
+    background-image: url("../images/Kylo_Ren.png");
+    alt: "Kylo Ren";
+}
+.Emperor_Palpatine {
+    background-image: url("../images/Emperor_Palpatine.png");
+    alt: "Emperor Palpatine";
+}
+.Obi_Wan {
+    background-image: url("../images/Obi-Wan.png");
+    alt: "Obi Wan";
+}
+.Luke_Skywalker{
+    background-image: url("../images/Luke_Skywalker.png");
+    alt: "Luke Skywalker";
+}
+.Rey {
+    background-image: url("../images/Rey.png");
+    alt: "Rey";
+}
+.Master_Yoda {
+    background-image: url("../images/Master_Yoda.png");
+    alt: "Master Yoda";
+}
+
+/* btn */
+#ATK_button {
+    display: none;
+}
+#RST_button {
+    display: none;
+}
