@@ -28,9 +28,8 @@ function clearBox(chara) {
 var Sith = $(".sith_logo");
 var Jedi = $(".jedi_logo");
 
-$(Sith).on("click", function () {
-    opacityChange(Jedi);
-    opacityNone(Sith);
+
+function pickSithCharacters() {
     ShowCharacter(Darth_Maul);
     ShowCharacter(Darth_Vader);
     ShowCharacter(Kylo_Ren);
@@ -39,11 +38,8 @@ $(Sith).on("click", function () {
     HideCharacter(Luke_Skywalker)
     HideCharacter(Rey)
     HideCharacter(Master_Yoda)
-    $("#lineTwo").text("Pick your character");
-});
-$(Jedi).on("click", function () {
-    opacityChange(Sith);
-    opacityNone(Jedi);
+}
+function pickJediCharacters() {
     ShowCharacter(Obi_Wan);
     ShowCharacter(Luke_Skywalker);
     ShowCharacter(Rey);
@@ -52,6 +48,17 @@ $(Jedi).on("click", function () {
     HideCharacter(Darth_Vader)
     HideCharacter(Kylo_Ren)
     HideCharacter(Emperor_Palpatine)
+}
+$(Sith).on("click", function () {
+    opacityChange(Jedi);
+    opacityNone(Sith);
+    pickSithCharacters();
+    $("#lineTwo").text("Pick your character");
+});
+$(Jedi).on("click", function () {
+    opacityChange(Sith);
+    opacityNone(Jedi);
+    pickJediCharacters();
     $("#lineTwo").text("Pick your character");
 });
 function sithJediUnClick() {
@@ -77,10 +84,10 @@ function sithEnemyLine() {
     ShowCharacter(Luke_Skywalker);
     ShowCharacter(Rey);
     ShowCharacter(Master_Yoda);
-    clearCharacter(Darth_Maul);
-    clearCharacter(Darth_Vader);
-    clearCharacter(Kylo_Ren);
-    clearCharacter(Emperor_Palpatine);
+    HideCharacter(Darth_Maul);
+    HideCharacter(Darth_Vader);
+    HideCharacter(Kylo_Ren);
+    HideCharacter(Emperor_Palpatine);
     $("#lineOne").text("");
     $("#lineTwo").text("Choose your opponent");
 }
@@ -91,28 +98,32 @@ function jediEnemyLine() {
     ShowCharacter(Darth_Vader);
     ShowCharacter(Kylo_Ren);
     ShowCharacter(Emperor_Palpatine);
-    clearCharacter(Obi_Wan);
-    clearCharacter(Luke_Skywalker);
-    clearCharacter(Rey);
-    clearCharacter(Master_Yoda);
+    HideCharacter(Obi_Wan);
+    HideCharacter(Luke_Skywalker);
+    HideCharacter(Rey);
+    HideCharacter(Master_Yoda);
     $("#lineOne").text("");
     $("#lineTwo").text("Choose your opponent");
 }
 var userCharacterIsChosen = false;
 var enemyCharacterIsChosen = false;
+var usedIDs = [];
 
 // Sith
 $(Darth_Maul).on("click", function () {
-    if (userCharacterIsChosen === false) {
+    if ((userCharacterIsChosen === false) && (($(usedIDs).index(5) === -1))) {
         userCharacterIsChosen = true;
         sithEnemyLine();
-        $("#user_character").addClass("Darth_Maul");
-        $(".Darth_Maul").attr("style", "display: flex;");
-        $("#user_character_name").text("Darth Maul");
+        $("#user_character").addClass("Darth_Maul_Fight");
+        $(".Darth_Maul_Fight").attr("style", "display: flex;");
+        firstPick("Darth Maul");
         opacityNone(Jedi);
-    } else if (enemyCharacterIsChosen === false) {
+        HideCharacter(Darth_Maul);
+    } else if ((enemyCharacterIsChosen === false) && (($(usedIDs).index(5) === -1))) {
         enemyCharacterIsChosen = true;
         ID = 5;
+        usedIDs.push(ID);
+        $(usedIDs).add(ID);
         $("#enemy_character").addClass("Darth_Maul");
         $(".Darth_Maul").attr("style", "display: flex;");
         secondPick("Darth Maul");
@@ -122,20 +133,21 @@ $(Darth_Maul).on("click", function () {
         characterID = 1;
         showStatus();
         sithJediUnClick();
-        $(Darth_Maul).off();
     }
 });
 $(Darth_Vader).on("click", function () {
     if (userCharacterIsChosen === false) {
         userCharacterIsChosen = true;
         sithEnemyLine()
-        $("#user_character").addClass("Darth_Vader");
-        $(".Darth_Vader").attr("style", "display: flex;");
-        $("#user_character_name").text("Darth Vader");
+        $("#user_character").addClass("Darth_Vader_Fight");
+        $(".Darth_Vader_Fight").attr("style", "display: flex;");
+        firstPick("Darth Vader");
         opacityNone(Jedi);
-    } else if (enemyCharacterIsChosen === false) {
+        HideCharacter(Darth_Vader);
+    } else if ((enemyCharacterIsChosen === false) && (($(usedIDs).index(6) === -1))) {
         enemyCharacterIsChosen = true;
         ID = 6;
+        usedIDs.push(ID);
         $("#enemy_character").addClass("Darth_Vader");
         $(".Darth_Vader").attr("style", "display: flex;");
         secondPick("Darth Vader");
@@ -145,20 +157,21 @@ $(Darth_Vader).on("click", function () {
         characterID = 2;
         showStatus();
         sithJediUnClick();
-        $(Darth_Vader).off();
     }
 });
 $(Kylo_Ren).on("click", function () {
     if (userCharacterIsChosen === false) {
         userCharacterIsChosen = true;
         sithEnemyLine()
-        $("#user_character").addClass("Kylo_Ren");
-        $(".Kylo_Ren").attr("style", "display: flex;");
-        $("#user_character_name").text("Kylo Ren");
+        $("#user_character").addClass("Kylo_Ren_Fight");
+        $(".Kylo_Ren_Fight").attr("style", "display: flex;");
+        firstPick("Kylo Ren");
         opacityNone(Jedi);
-    } else if (enemyCharacterIsChosen === false) {
+        HideCharacter(Kylo_Ren);
+    } else if ((enemyCharacterIsChosen === false) && (($(usedIDs).index(7) === -1))) {
         enemyCharacterIsChosen = true;
         ID = 7;
+        usedIDs.push(ID);
         $("#enemy_character").addClass("Kylo_Ren");
         $(".Kylo_Ren").attr("style", "display: flex;");
         secondPick("Kylo Ren");
@@ -168,20 +181,21 @@ $(Kylo_Ren).on("click", function () {
         characterID = 3;
         showStatus();
         sithJediUnClick();
-        $(Kylo_Ren).off();
     }
 });
 $(Emperor_Palpatine).on("click", function () {
     if (userCharacterIsChosen === false) {
         userCharacterIsChosen = true;
         sithEnemyLine()
-        $("#user_character").addClass("Emperor_Palpatine");
-        $(".Emperor_Palpatine").attr("style", "display: flex;");
-        $("#user_character_name").text("Emperor Palpatine");
+        $("#user_character").addClass("Emperor_Palpatine_Fight");
+        $(".Emperor_Palpatine_Fight").attr("style", "display: flex;");
+        firstPick("Emperor Palpatine");
         opacityNone(Jedi);
-    } else if (enemyCharacterIsChosen === false) {
+        HideCharacter(Emperor_Palpatine);
+    } else if ((enemyCharacterIsChosen === false) && (($(usedIDs).index(8) === -1))) {
         enemyCharacterIsChosen = true;
         ID = 8;
+        usedIDs.push(ID);
         $("#enemy_character").addClass("Emperor_Palpatine");
         $(".Emperor_Palpatine").attr("style", "display: flex;");
         secondPick("Emperor Palpatine");
@@ -191,7 +205,6 @@ $(Emperor_Palpatine).on("click", function () {
         characterID = 4;
         showStatus();
         sithJediUnClick();
-        $(Emperor_Palpatine).off();
     }
 });
 
@@ -200,13 +213,15 @@ $(Obi_Wan).on("click", function () {
     if (userCharacterIsChosen === false) {
         userCharacterIsChosen = true;
         jediEnemyLine()
-        $("#user_character").addClass("Obi_Wan");
-        $(".Obi_Wan").attr("style", "display: flex;");
-        $("#user_character_name").text("Obi Wan");
+        $("#user_character").addClass("Obi_Wan_Fight");
+        $(".Obi_Wan_Fight").attr("style", "display: flex;");
+        firstPick("Obi Wan");
         opacityNone(Sith);
-    } else if (enemyCharacterIsChosen === false) {
+        HideCharacter(Obi_Wan);
+    } else if ((enemyCharacterIsChosen === false) && (($(usedIDs).index(1) === -1))) {
         enemyCharacterIsChosen = true;
         ID = 1;
+        usedIDs.push(ID);
         $("#enemy_character").addClass("Obi_Wan");
         secondPick("Obi Wan");
         $(".Obi_Wan").attr("style", "display: flex;");
@@ -215,20 +230,21 @@ $(Obi_Wan).on("click", function () {
         chracterATK = 5;
         showStatus();
         sithJediUnClick();
-        $(Obi_Wan).off();
     }
 });
 $(Luke_Skywalker).on("click", function () {
     if (userCharacterIsChosen === false) {
         userCharacterIsChosen = true;
         jediEnemyLine()
-        $("#user_character").addClass("Luke_Skywalker");
-        $(".Luke_Skywalker").attr("style", "display: flex;");
-        $("#user_character_name").text("Luke Skywalker");
+        $("#user_character").addClass("Luke_Skywalker_Fight");
+        $(".Luke_Skywalker_Fight").attr("style", "display: flex;");
+        firstPick("Luke Skywalker");
         opacityNone(Sith);
-    } else if (enemyCharacterIsChosen === false) {
+        HideCharacter(Luke_Skywalker);
+    } else if ((enemyCharacterIsChosen === false) && (($(usedIDs).index(2) === -1))) {
         enemyCharacterIsChosen = true;
         ID = 2;
+        usedIDs.push(ID);
         $("#enemy_character").addClass("Luke_Skywalker");
         secondPick("Luke Skywalker");
         $(".Luke_Skywalker").attr("style", "display: flex;");
@@ -237,20 +253,21 @@ $(Luke_Skywalker).on("click", function () {
         chracterATK = 10;
         showStatus();
         sithJediUnClick();
-        $(Luke_Skywalker).off();
     }
 });
 $(Rey).on("click", function () {
     if (userCharacterIsChosen === false) {
         userCharacterIsChosen = true;
         jediEnemyLine()
-        $("#user_character").addClass("Rey");
-        $(".Rey").attr("style", "display: flex;");
-        $("#user_character_name").text("Rey");
+        $("#user_character").addClass("Rey_Fight");
+        $(".Rey_Fight").attr("style", "display: flex;");
+        firstPick("Rey");
         opacityNone(Sith);
-    } else if (enemyCharacterIsChosen === false) {
+        HideCharacter(Rey);
+    } else if ((enemyCharacterIsChosen === false) && (($(usedIDs).index(3) === -1))) {
         enemyCharacterIsChosen = true;
         ID = 3;
+        usedIDs.push(ID);
         $("#enemy_character").addClass("Rey");
         secondPick("Rey");
         $(".Rey").attr("style", "display: flex;");
@@ -259,20 +276,21 @@ $(Rey).on("click", function () {
         chracterATK = 20;
         showStatus();
         sithJediUnClick();
-        $(Rey).off();
     }
 });
 $(Master_Yoda).on("click", function () {
     if (userCharacterIsChosen === false) {
         userCharacterIsChosen = true;
-        jediEnemyLine()
-        $("#user_character").addClass("Master_Yoda");
-        $(".Master_Yoda").attr("style", "display: flex;");
-        $("#user_character_name").text("Master Yoda");
+        jediEnemyLine();
+        $("#user_character").addClass("Master_Yoda_Fight");
+        $(".Master_Yoda_Fight").attr("style", "display: flex;");
+        firstPick("Master Yoda");
         opacityNone(Sith);
-    } else if (enemyCharacterIsChosen === false) {
+        HideCharacter(Master_Yoda);
+    } else if ((enemyCharacterIsChosen === false) && (($(usedIDs).index(4) === -1))) {
         enemyCharacterIsChosen = true;
         ID = 4;
+        usedIDs.push(ID);
         $("#enemy_character").addClass("Master_Yoda");
         secondPick("Master Yoda");
         $(".Master_Yoda").attr("style", "display: flex;");
@@ -281,10 +299,14 @@ $(Master_Yoda).on("click", function () {
         chracterATK = 25;
         showStatus();
         sithJediUnClick();
-        $(Master_Yoda).off();
     }
 });
 
+function firstPick(name) {
+    var newH4name = $("<h4>");
+    $(newH4name).text(name)
+    $("#user_character").append(newH4name);
+}
 function secondPick(name) {
     var newH4name = $("<h4>");
     $(newH4name).text(name)
@@ -305,15 +327,15 @@ function showRestartButton() {
 function hideRestartButton() {
     $("#RST_button").attr("style", "display: none;");
 }
-function clearAllCharacters() {
-    clearCharacter(Obi_Wan);
-    clearCharacter(Luke_Skywalker);
-    clearCharacter(Rey);
-    clearCharacter(Master_Yoda);
-    clearCharacter(Darth_Maul);
-    clearCharacter(Darth_Vader);
-    clearCharacter(Kylo_Ren);
-    clearCharacter(Emperor_Palpatine);
+function hideAllCharacters() {
+    HideCharacter(Obi_Wan);
+    HideCharacter(Luke_Skywalker);
+    HideCharacter(Rey);
+    HideCharacter(Master_Yoda);
+    HideCharacter(Darth_Maul);
+    HideCharacter(Darth_Vader);
+    HideCharacter(Kylo_Ren);
+    HideCharacter(Emperor_Palpatine);
 }
 
 // User status
@@ -321,6 +343,10 @@ var user_HP = 160;
 var chracterHP;
 var user_ATK = 0;
 
+// Fighting actions
+var btnATKclick = $("#ATK_button");
+var btnRSTclick = $("#RST_button");
+var characterID;
 function userATKgrow() {
     user_ATK = user_ATK + 6;
 }
@@ -330,45 +356,25 @@ function userHPlower() {
 function charHPlower() {
     chracterHP = chracterHP - user_ATK;
 }
-var btnClick = $("#ATK_button");
-var characterID;
 
+// Status actions
 function userStatusChange() {
     // User status
-    clearBox("#user_status")
-
     userHPlower()
-    u_HP = $("<h4>");
-    $(u_HP).text("your HP: " + user_HP);
-    $("#user_status").append(u_HP);
-
     userATKgrow();
-    u_ATK = $("<h4>");
-    $(u_ATK).text("your ATK: " + user_ATK);
-    $("#user_status").append(u_ATK);
-
-
+    showUserStatus();
     // User Die
     if (user_HP <= 0) {
         $("#user_status").html("<h2>You Died</h2>");
         hideAttackButton();
-        clearAllCharacters()
+        hideAllCharacters()
         setTimeout(function () { showRestartButton() }, 2000);
     }
 }
 function enemyStatusChange() {
     // Caracter status
-    clearBox("#enemy_status")
-
-    charHPlower()
-    c_HP = $("<h4>");
-    $(c_HP).text("enemy's HP: " + chracterHP);
-    $("#enemy_status").append(c_HP);
-
-    c_ATK = $("<h4>");
-    $(c_ATK).text("enemy's ATK: " + chracterATK);
-    $("#enemy_status").append(c_ATK);
-
+    charHPlower();
+    showCharacterStatus();
     // Caracter Die
     if (chracterHP <= 0) {
         clearBox("#enemy_character")
@@ -381,27 +387,27 @@ function enemyStatusChange() {
         killCharacter();
     }
 }
-function showStatus() {
-
-    // User status
+function showUserStatus() {
     clearBox("#user_status")
-
     u_HP = $("<h4>");
     $(u_HP).text("your HP: " + user_HP);
     $("#user_status").append(u_HP);
     u_ATK = $("<h4>");
     $(u_ATK).text("your ATK: " + user_ATK);
     $("#user_status").append(u_ATK);
-
-    // Caracter status
+}
+function showCharacterStatus() {
     clearBox("#enemy_status")
-
     c_HP = $("<h4>");
     $(c_HP).text("enemy's HP: " + chracterHP);
     $("#enemy_status").append(c_HP);
     c_ATK = $("<h4>");
     $(c_ATK).text("enemy's ATK: " + chracterATK);
     $("#enemy_status").append(c_ATK);
+}
+function showStatus() {
+    showUserStatus();
+    showCharacterStatus()
 }
 function killCharacter() {
     if (ID === 1) {
@@ -429,8 +435,71 @@ function killCharacter() {
         $(".Emperor_Palpatine").css({ "background-image": "url('assets/images/Emperor_Palpatine_Die.png')" });
     }
 }
+function reviveCharacter() {
+    $(".Obi_Wan").css({ "background-image": "url('assets/images/Obi-Wan.png')" });
+    $(".Luke_Skywalker").css({ "background-image": "url('assets/images/Luke_Skywalker.png')" });
+    $(".Rey").css({ "background-image": "url('assets/images/Rey.png')" });
+    $(".Master_Yoda").css({ "background-image": "url('assets/images/Master_Yoda.png')" });
+    $(".Darth_Maul").css({ "background-image": "url('assets/images/Darth_Maul.png')" });
+    $(".Darth_Vader").css({ "background-image": "url('assets/images/Darth_Vader.png')" });
+    $(".Kylo_Ren").css({ "background-image": "url('assets/images/Kylo_Ren.png')" });
+    $(".Emperor_Palpatine").css({ "background-image": "url('assets/images/Emperor_Palpatine.png')" });
+}
 
-$(btnClick).on("click", function () {
+// Btn - ATK & RST
+$(btnATKclick).on("click", function () {
     enemyStatusChange();
     userStatusChange();
+});
+$(btnRSTclick).on("click", function () {
+    hideRestartButton()
+    userCharacterIsChosen = false;
+    enemyCharacterIsChosen = false;
+    usedIDs = [];
+    user_HP = 160;
+    user_ATK = 0;
+    //fix row 2
+    $("#lineOne").text("Choose a side");
+    //fix row 3 - a
+    $("#user_character").removeClass();
+    $("#user_character").css({ "background-image": "" });
+    $("#user_character").empty();
+    //fix row 3 - b
+    $("#user_status").empty();
+
+    var bringImgback = $("<img>").attr("src", "assets/images/Sith_Logo_small.png");
+    $("#user_status").append(bringImgback);
+    var bringH3back = $("<h3>").addClass("downText").text("Sith");
+    $("#user_status").append(bringH3back);
+
+    $(".sith_logo").on("Click", pickSithCharacters());
+    //fix row 3 - c
+    $("#enemy_status").empty();
+
+    var bringImgback2 = $("<img>").attr("src", "assets/images/Jedi_Logo_small.png");
+    $("#enemy_status").append(bringImgback2);
+    var bringH3back2 = $("<h3>").addClass("downText").text("Jedi");
+    $("#enemy_status").append(bringH3back2);
+
+    $(".jedi_logo").on("Click", pickJediCharacters());
+    //fix row 3 - d
+    $("#enemy_character").removeClass();
+    $("#enemy_character").css({ "background-image": "" });
+    $("#enemy_character").empty();
+    //fix row 5
+    reviveCharacter();
+
+    $(Sith).on("click", function () {
+        opacityChange(Jedi);
+        opacityNone(Sith);
+        pickSithCharacters();
+        $("#lineTwo").text("Pick your character");
+    });
+    $(Jedi).on("click", function () {
+        opacityChange(Sith);
+        opacityNone(Jedi);
+        pickJediCharacters();
+        $("#lineTwo").text("Pick your character");
+    });
+    hideAllCharacters();
 });

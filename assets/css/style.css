@@ -39,7 +39,9 @@ body {
 /* Charecters */
 
 .Darth_Maul, .Darth_Vader, .Kylo_Ren, .Emperor_Palpatine,
-.Obi_Wan, .Luke_Skywalker, .Rey, .Master_Yoda {
+.Obi_Wan, .Luke_Skywalker, .Rey, .Master_Yoda,
+.Darth_Maul_Fight, .Darth_Vader_Fight, .Kylo_Ren_Fight, .Emperor_Palpatine_Fight,
+.Obi_Wan_Fight, .Luke_Skywalker_Fight, .Rey_Fight, .Master_Yoda_Fight {
     width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -75,6 +77,40 @@ body {
 }
 .Master_Yoda {
     background-image: url("../images/Master_Yoda.png");
+    alt: "Master Yoda";
+}
+
+
+.Darth_Maul_Fight {
+    background-image: url("../images/Darth_Maul_Fight.png");
+    alt: "Darth Maul";
+}
+.Darth_Vader_Fight {
+    background-image: url("../images/Darth_Vader_Fight.png");
+    alt: "Darth Vader";
+}
+.Kylo_Ren_Fight {
+    background-image: url("../images/Kylo_Ren_Fight.png");
+    alt: "Kylo Ren";
+}
+.Emperor_Palpatine_Fight {
+    background-image: url("../images/Emperor_Palpatine_Fight.png");
+    alt: "Emperor Palpatine";
+}
+.Obi_Wan_Fight {
+    background-image: url("../images/Obi-Wan_Fight.png");
+    alt: "Obi Wan";
+}
+.Luke_Skywalker_Fight {
+    background-image: url("../images/Luke_Skywalker_Fight.png");
+    alt: "Luke Skywalker";
+}
+.Rey_Fight {
+    background-image: url("../images/Rey_Fight.png");
+    alt: "Rey";
+}
+.Master_Yoda_Fight {
+    background-image: url("../images/Master_Yoda_Fight.png");
     alt: "Master Yoda";
 }
 
