@@ -8,6 +8,9 @@ body {
 .row{
     justify-content: center;
 }
+.btnRow {
+height: 100px; 
+}
 .box {
     height: 200px;
     width: 200px;

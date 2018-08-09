@@ -1,6 +1,10 @@
 // ***Bootcamp H.W 4***
 
-
+$("<audio></audio>").attr({
+    'src': 'assets/audio/Jimmy_Fallon_Star_Wars_Cast_Sing.mp3',
+    'volume': 0.4,
+    'autoplay': 'autoplay'
+}).appendTo("body");
 
 // Set some effects for images
 function opacityChange(img) {
@@ -124,11 +128,11 @@ $(Darth_Maul).on("click", function () {
         ID = 5;
         usedIDs.push(ID);
         $(usedIDs).add(ID);
-        $("#enemy_character").addClass("Darth_Maul");
-        $(".Darth_Maul").attr("style", "display: flex;");
+        $("#enemy_character").addClass("Darth_Maul_Fight");
+        $(".Darth_Maul_Fight").attr("style", "display: flex;");
         secondPick("Darth Maul");
         showAttackButton();
-        chracterHP = 120;
+        chracterHP = 160;
         chracterATK = 5;
         characterID = 1;
         showStatus();
@@ -148,8 +152,8 @@ $(Darth_Vader).on("click", function () {
         enemyCharacterIsChosen = true;
         ID = 6;
         usedIDs.push(ID);
-        $("#enemy_character").addClass("Darth_Vader");
-        $(".Darth_Vader").attr("style", "display: flex;");
+        $("#enemy_character").addClass("Darth_Vader_Fight");
+        $(".Darth_Vader_Fight").attr("style", "display: flex;");
         secondPick("Darth Vader");
         showAttackButton();
         chracterHP = 180;
@@ -172,11 +176,11 @@ $(Kylo_Ren).on("click", function () {
         enemyCharacterIsChosen = true;
         ID = 7;
         usedIDs.push(ID);
-        $("#enemy_character").addClass("Kylo_Ren");
-        $(".Kylo_Ren").attr("style", "display: flex;");
+        $("#enemy_character").addClass("Kylo_Ren_Fight");
+        $(".Kylo_Ren_Fight").attr("style", "display: flex;");
         secondPick("Kylo Ren");
         showAttackButton();
-        chracterHP = 240;
+        chracterHP = 200;
         chracterATK = 20;
         characterID = 3;
         showStatus();
@@ -196,11 +200,11 @@ $(Emperor_Palpatine).on("click", function () {
         enemyCharacterIsChosen = true;
         ID = 8;
         usedIDs.push(ID);
-        $("#enemy_character").addClass("Emperor_Palpatine");
-        $(".Emperor_Palpatine").attr("style", "display: flex;");
+        $("#enemy_character").addClass("Emperor_Palpatine_Fight");
+        $(".Emperor_Palpatine_Fight").attr("style", "display: flex;");
         secondPick("Emperor Palpatine");
         showAttackButton();
-        chracterHP = 300;
+        chracterHP = 250;
         chracterATK = 25;
         characterID = 4;
         showStatus();
@@ -222,11 +226,11 @@ $(Obi_Wan).on("click", function () {
         enemyCharacterIsChosen = true;
         ID = 1;
         usedIDs.push(ID);
-        $("#enemy_character").addClass("Obi_Wan");
+        $("#enemy_character").addClass("Obi_Wan_Fight");
         secondPick("Obi Wan");
-        $(".Obi_Wan").attr("style", "display: flex;");
+        $(".Obi_Wan_Fight").attr("style", "display: flex;");
         showAttackButton();
-        chracterHP = 120;
+        chracterHP = 160;
         chracterATK = 5;
         showStatus();
         sithJediUnClick();
@@ -245,9 +249,9 @@ $(Luke_Skywalker).on("click", function () {
         enemyCharacterIsChosen = true;
         ID = 2;
         usedIDs.push(ID);
-        $("#enemy_character").addClass("Luke_Skywalker");
+        $("#enemy_character").addClass("Luke_Skywalker_Fight");
         secondPick("Luke Skywalker");
-        $(".Luke_Skywalker").attr("style", "display: flex;");
+        $(".Luke_Skywalker_Fight").attr("style", "display: flex;");
         showAttackButton();
         chracterHP = 180;
         chracterATK = 10;
@@ -268,11 +272,11 @@ $(Rey).on("click", function () {
         enemyCharacterIsChosen = true;
         ID = 3;
         usedIDs.push(ID);
-        $("#enemy_character").addClass("Rey");
+        $("#enemy_character").addClass("Rey_Fight");
         secondPick("Rey");
-        $(".Rey").attr("style", "display: flex;");
+        $(".Rey_Fight").attr("style", "display: flex;");
         showAttackButton();
-        chracterHP = 240;
+        chracterHP = 200;
         chracterATK = 20;
         showStatus();
         sithJediUnClick();
@@ -291,11 +295,11 @@ $(Master_Yoda).on("click", function () {
         enemyCharacterIsChosen = true;
         ID = 4;
         usedIDs.push(ID);
-        $("#enemy_character").addClass("Master_Yoda");
+        $("#enemy_character").addClass("Master_Yoda_Fight");
+        $(".Master_Yoda_Fight").attr("style", "display: flex;");
         secondPick("Master Yoda");
-        $(".Master_Yoda").attr("style", "display: flex;");
         showAttackButton();
-        chracterHP = 300;
+        chracterHP = 250;
         chracterATK = 25;
         showStatus();
         sithJediUnClick();
@@ -342,6 +346,7 @@ function hideAllCharacters() {
 var user_HP = 160;
 var chracterHP;
 var user_ATK = 0;
+var winCount = 0;
 
 // Fighting actions
 var btnATKclick = $("#ATK_button");
@@ -385,6 +390,11 @@ function enemyStatusChange() {
         enemyCharacterIsChosen = false;
         chracterATK = 0;
         killCharacter();
+        winCount = winCount + 1;
+        if (winCount === 4) {
+            $("#enemy_status").html("<h1>You Won!</h1>");
+            setTimeout(function () { showRestartButton() }, 2000);
+        }
     }
 }
 function showUserStatus() {
@@ -412,38 +422,54 @@ function showStatus() {
 function killCharacter() {
     if (ID === 1) {
         $(".Obi_Wan").css({ "background-image": "url('assets/images/Obi-Wan_Die.png')" });
+        $(".Obi_Wan").css({ "color": "rgb(44, 44, 44)" });
     }
     if (ID === 2) {
         $(".Luke_Skywalker").css({ "background-image": "url('assets/images/Luke_Skywalker_Die.png')" });
+        $(".Luke_Skywalker").css({ "color": "rgb(44, 44, 44)" });
     }
     if (ID === 3) {
         $(".Rey").css({ "background-image": "url('assets/images/Rey_Die.png')" });
+        $(".Rey").css({ "color": "rgb(44, 44, 44)" });
     }
     if (ID === 4) {
         $(".Master_Yoda").css({ "background-image": "url('assets/images/Master_Yoda_Die.png')" });
+        $(".Master_Yoda").css({ "color": "rgb(44, 44, 44)" });
     }
     if (ID === 5) {
         $(".Darth_Maul").css({ "background-image": "url('assets/images/Darth_Maul_Die.png')" });
+        $(".Darth_Maul").css({ "color": "rgb(44, 44, 44)" });
     }
     if (ID === 6) {
         $(".Darth_Vader").css({ "background-image": "url('assets/images/Darth_Vader_Die.png')" });
+        $(".Darth_Vader").css({ "color": "rgb(44, 44, 44)" });
     }
     if (ID === 7) {
         $(".Kylo_Ren").css({ "background-image": "url('assets/images/Kylo_Ren_Die.png')" });
+        $(".Kylo_Ren").css({ "color": "rgb(44, 44, 44)" });
     }
     if (ID === 8) {
         $(".Emperor_Palpatine").css({ "background-image": "url('assets/images/Emperor_Palpatine_Die.png')" });
+        $(".Emperor_Palpatine").css({ "color": "rgb(44, 44, 44)" });
     }
 }
 function reviveCharacter() {
     $(".Obi_Wan").css({ "background-image": "url('assets/images/Obi-Wan.png')" });
+    $(".Obi_Wan").css({ "color": "rgb(255, 255, 255)" });
     $(".Luke_Skywalker").css({ "background-image": "url('assets/images/Luke_Skywalker.png')" });
+    $(".Luke_Skywalker").css({ "color": "rgb(255, 255, 255)" });
     $(".Rey").css({ "background-image": "url('assets/images/Rey.png')" });
+    $(".Rey").css({ "color": "rgb(255, 255, 255)" });
     $(".Master_Yoda").css({ "background-image": "url('assets/images/Master_Yoda.png')" });
+    $(".Master_Yoda").css({ "color": "rgb(255, 255, 255)" });
     $(".Darth_Maul").css({ "background-image": "url('assets/images/Darth_Maul.png')" });
+    $(".Darth_Maul").css({ "color": "rgbrgb(255, 255, 255)" });
     $(".Darth_Vader").css({ "background-image": "url('assets/images/Darth_Vader.png')" });
+    $(".Darth_Vader").css({ "color": "rgbrgb(255, 255, 255)" });
     $(".Kylo_Ren").css({ "background-image": "url('assets/images/Kylo_Ren.png')" });
+    $(".Kylo_Ren").css({ "color": "rgbrgb(255, 255, 255)" });
     $(".Emperor_Palpatine").css({ "background-image": "url('assets/images/Emperor_Palpatine.png')" });
+    $(".Emperor_Palpatine").css({ "color": "rgb(255, 255, 255)" });
 }
 
 // Btn - ATK & RST
@@ -458,6 +484,7 @@ $(btnRSTclick).on("click", function () {
     usedIDs = [];
     user_HP = 160;
     user_ATK = 0;
+    winCount = 0;
     //fix row 2
     $("#lineOne").text("Choose a side");
     //fix row 3 - a
