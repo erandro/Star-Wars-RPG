@@ -2,7 +2,7 @@
 
 $("<audio></audio>").attr({
     'src': 'assets/audio/Jimmy_Fallon_Star_Wars_Cast_Sing.mp3',
-    'volume': 0.4,
+    'volume': 0.3,
     'autoplay': 'autoplay'
 }).appendTo("body");
 
@@ -57,13 +57,13 @@ $(Sith).on("click", function () {
     opacityChange(Jedi);
     opacityNone(Sith);
     pickSithCharacters();
-    $("#lineTwo").text("Pick your character");
+    $("#lineTwo").text("Choose your character");
 });
 $(Jedi).on("click", function () {
     opacityChange(Sith);
     opacityNone(Jedi);
     pickJediCharacters();
-    $("#lineTwo").text("Pick your character");
+    $("#lineTwo").text("Choose your character");
 });
 function sithJediUnClick() {
     $(Sith).off("click");
@@ -520,13 +520,13 @@ $(btnRSTclick).on("click", function () {
         opacityChange(Jedi);
         opacityNone(Sith);
         pickSithCharacters();
-        $("#lineTwo").text("Pick your character");
+        $("#lineTwo").text("Choose your character");
     });
     $(Jedi).on("click", function () {
         opacityChange(Sith);
         opacityNone(Jedi);
         pickJediCharacters();
-        $("#lineTwo").text("Pick your character");
+        $("#lineTwo").text("Choose your character");
     });
     hideAllCharacters();
 });
