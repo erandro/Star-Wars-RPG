@@ -22,8 +22,6 @@ $(document).ready(function () {
 
 var soundStatus = "off";
 
-
-
 const backgrounds = [
     "ahch-to",
     "bay",
@@ -128,6 +126,8 @@ var Rey = $(".Rey");
 var Master_Yoda = $(".Master_Yoda");
 var ID = 0;
 
+var user_character = $("#user_character")
+
 function sithEnemyLine() {
     clearBox(Sith);
     clearBox(Jedi);
@@ -155,7 +155,7 @@ $(Darth_Maul).on("click", function () {
     if ((userCharacterIsChosen === false) && (($(usedIDs).index(5) === -1))) {
         userCharacterIsChosen = true;
         sithEnemyLine();
-        $("#user_character").append('<img class="character-img flip-img" src="./assets/images/maul.png" alt="Darth Maul">');
+        $(user_character).append('<img class="character-img flip-img" src="./assets/images/maul.png" alt="Darth Maul">');
         firstPick("Darth Maul");
         userChar = "maul";
         opacityNone(Jedi);
@@ -181,7 +181,7 @@ $(Darth_Vader).on("click", function () {
     if (userCharacterIsChosen === false) {
         userCharacterIsChosen = true;
         sithEnemyLine()
-        $("#user_character").append('<img class="character-img flip-img" src="./assets/images/vader.png" alt="Darth Vader">');
+        $(user_character).append('<img class="character-img flip-img" src="./assets/images/vader.png" alt="Darth Vader">');
         firstPick("Darth Vader");
         userChar = "vader";
         opacityNone(Jedi);
@@ -206,7 +206,7 @@ $(Kylo_Ren).on("click", function () {
     if (userCharacterIsChosen === false) {
         userCharacterIsChosen = true;
         sithEnemyLine()
-        $("#user_character").append('<img class="character-img flip-img" src="./assets/images/kylo.png" alt="Kylo Ren">');
+        $(user_character).append('<img class="character-img flip-img" src="./assets/images/kylo.png" alt="Kylo Ren">');
         firstPick("Kylo Ren");
         userChar = "kylo";
         opacityNone(Jedi);
@@ -231,7 +231,7 @@ $(Emperor_Palpatine).on("click", function () {
     if (userCharacterIsChosen === false) {
         userCharacterIsChosen = true;
         sithEnemyLine()
-        $("#user_character").append('<img class="character-img flip-img" src="./assets/images/palpatine.png" alt="Emperor Palpatine">');
+        $(user_character).append('<img class="character-img flip-img" src="./assets/images/palpatine.png" alt="Emperor Palpatine">');
         firstPick("Emperor Palpatine");
         userChar = "palpatine";
         opacityNone(Jedi);
@@ -258,7 +258,7 @@ $(Obi_Wan).on("click", function () {
     if (userCharacterIsChosen === false) {
         userCharacterIsChosen = true;
         jediEnemyLine()
-        $("#user_character").append('<img class="character-img flip-img" src="./assets/images/obi.png" alt="Obi Wan">');
+        $(user_character).append('<img class="character-img flip-img" src="./assets/images/obi.png" alt="Obi Wan">');
         firstPick("Obi Wan");
         userChar = "obi";
         opacityNone(Sith);
@@ -282,7 +282,7 @@ $(Luke_Skywalker).on("click", function () {
     if (userCharacterIsChosen === false) {
         userCharacterIsChosen = true;
         jediEnemyLine()
-        $("#user_character").append('<img class="character-img flip-img" src="./assets/images/luke.png" alt="Luke Skywalker">');
+        $(user_character).append('<img class="character-img flip-img" src="./assets/images/luke.png" alt="Luke Skywalker">');
         firstPick("Luke Skywalker");
         userChar = "luke";
         opacityNone(Sith);
@@ -306,7 +306,7 @@ $(Rey).on("click", function () {
     if (userCharacterIsChosen === false) {
         userCharacterIsChosen = true;
         jediEnemyLine()
-        $("#user_character").append('<img class="character-img flip-img" src="./assets/images/rey.png" alt="Rey">');
+        $(user_character).append('<img class="character-img flip-img" src="./assets/images/rey.png" alt="Rey">');
         firstPick("Rey");
         userChar = "rey";
         opacityNone(Sith);
@@ -330,7 +330,7 @@ $(Master_Yoda).on("click", function () {
     if (userCharacterIsChosen === false) {
         userCharacterIsChosen = true;
         jediEnemyLine();
-        $("#user_character").append('<img class="character-img flip-img" src="./assets/images/yoda.png" alt="Master Yoda">');
+        $(user_character).append('<img class="character-img flip-img" src="./assets/images/yoda.png" alt="Master Yoda">');
         firstPick("Master Yoda");
         userChar = "yoda";
         opacityNone(Sith);
@@ -356,6 +356,7 @@ function showFight() {
     $("#enemy-char-fight").append(`<img class="character-gif" src="./assets/images/${enemyChar}.gif" alt=${enemyChar}>`);
     $("#battlegrounds").attr("style", `background-image:url('./assets/images/background/${pickBackground()}.jpg')`)
     $("#all-characters").addClass("no-display");
+    killCharacter();
 }
 function hideFight() {
     $("#user-char-fight").empty();
@@ -367,7 +368,7 @@ function hideFight() {
 function firstPick(name) {
     var newH4name = $("<h4>");
     $(newH4name).text(name)
-    $("#user_character").append(newH4name);
+    $(user_character).append(newH4name);
 }
 function secondPick(name) {
     var newH4name = $("<h4>");
@@ -422,7 +423,7 @@ function userStatusChange() {
     showUserStatus();
     // User Die
     if (user_HP <= 0) {
-        $("#user_status").html("<h2>You Died</h2>");
+        $(".user_status").html("<h2>You Died</h2>");
         hideFight();
         hideAttackButton();
         hideAllCharacters()
@@ -436,41 +437,36 @@ function enemyStatusChange() {
     // Caracter Die
     if (chracterHP <= 0) {
         hideFight();
-        // if (ID === 1 || ID === 2 || ID === 3 || ID === 4) {
-        //     showJedi()
-        // } else { showSith() };
         clearBox("#enemy_character")
         $("#enemy_character").removeClass();
-        $("#enemy_status").html("<h2>Enemy Died</h2>");
-        //enemyIDdie(characterDeath);
+        $(".enemy_status").html("<h2>Enemy Died</h2>");
         hideAttackButton();
         enemyCharacterIsChosen = false;
         chracterATK = 0;
-        killCharacter();
         winCount = winCount + 1;
         if (winCount === 4) {
-            $("#enemy_status").html("<h1>You Won!</h1>");
+            $(".enemy_status").html("<h1>You Won!</h1>");
             setTimeout(function () { showRestartButton() }, 2000);
         }
     }
 }
 function showUserStatus() {
-    clearBox("#user_status")
+    clearBox(".user_status")
     u_HP = $("<h4>");
     $(u_HP).text("your HP: " + user_HP);
-    $("#user_status").append(u_HP);
+    $(".user_status").append(u_HP);
     u_ATK = $("<h4>");
     $(u_ATK).text("your ATK: " + user_ATK);
-    $("#user_status").append(u_ATK);
+    $(".user_status").append(u_ATK);
 }
 function showCharacterStatus() {
-    clearBox("#enemy_status")
+    clearBox(".enemy_status")
     c_HP = $("<h4>");
     $(c_HP).text("enemy's HP: " + chracterHP);
-    $("#enemy_status").append(c_HP);
+    $(".enemy_status").append(c_HP);
     c_ATK = $("<h4>");
     $(c_ATK).text("enemy's ATK: " + chracterATK);
-    $("#enemy_status").append(c_ATK);
+    $(".enemy_status").append(c_ATK);
 }
 function showStatus() {
     showUserStatus();
@@ -545,25 +541,25 @@ $(btnRSTclick).on("click", function () {
     //fix row 2
     $("#lineOne").text("Pick a side");
     //fix row 3 - a
-    $("#user_character").removeClass();
-    $("#user_character").css({ "background-image": "" });
-    $("#user_character").empty();
+    $(user_character).removeClass();
+    $(user_character).css({ "background-image": "" });
+    $(user_character).empty();
     //fix row 3 - b
-    $("#user_status").empty();
+    $(".user_status").empty();
 
     var bringImgback = $('<img src="assets/images/Sith_Logo_small.png" alt="Sith Logo" class="order-img">');
-    $("#user_status").append(bringImgback);
+    $(".user_status").append(bringImgback);
     var bringH3back = $("<h3>").addClass("downText").text("Sith");
-    $("#user_status").append(bringH3back);
+    $(".user_status").append(bringH3back);
 
     $(".sith_logo").on("Click", pickSithCharacters());
     //fix row 3 - c
-    $("#enemy_status").empty();
+    $(".enemy_status").empty();
 
     var bringImgback2 = $('<img src="assets/images/Jedi_Logo_small.png" alt="Jedi Logo" class="order-img">');
-    $("#enemy_status").append(bringImgback2);
+    $(".enemy_status").append(bringImgback2);
     var bringH3back2 = $("<h3>").addClass("downText").text("Jedi");
-    $("#enemy_status").append(bringH3back2);
+    $(".enemy_status").append(bringH3back2);
 
     $(".jedi_logo").on("Click", pickJediCharacters());
     //fix row 3 - d
