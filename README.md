@@ -17,5 +17,3 @@ This is a great example of using Jquery to do actions like adding classes, hidin
 Instructions are showing in the html page. This game is looped - so there are no wrong buttons to push.
 
 <img src="./assets/images/vader.gif" width="220">
-<img src="./assets/images/vader.gif" width="220">
-<img src="./assets/images/vader.gif" width="220">
